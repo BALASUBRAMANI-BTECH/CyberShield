@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues burpVersion="2024.1.1">
+  <issue>
+    <name>XML External Entity (XXE) Injection</name>
+    <host ip="127.0.0.1">http://localhost:3000</host>
+    <path>/api/b2b/order-xml</path>
+    <location>http://localhost:3000/api/b2b/order-xml</location>
+    <severity>High</severity>
+    <confidence>Certain</confidence>
+    <issueBackground>XML external entity injection occurs when XML input containing a reference to an external entity is processed by a weakly configured XML parser.</issueBackground>
+    <remediationBackground>Configure the XML parser to disable DTDs (external entities) completely according to OWASP XXE Prevention guidance.</remediationBackground>
+    <issueDetail>The application parsed an XML document containing external entity references and returned root directory contents in the response body.</issueDetail>
+  </issue>
+  <issue>
+    <name>Cross-Site Request Forgery (CSRF)</name>
+    <host ip="127.0.0.1">http://localhost:3000</host>
+    <path>/rest/user/change-password</path>
+    <location>http://localhost:3000/rest/user/change-password</location>
+    <severity>Medium</severity>
+    <confidence>Firm</confidence>
+    <issueBackground>CSRF vulnerabilities arise when applications rely solely on automatically submitted browser credentials (such as cookies) without unpredictable challenge tokens.</issueBackground>
+    <remediationBackground>Implement anti-CSRF tokens (Synchronizer Token Pattern or SameSite=Strict cookies) on all state-modifying requests.</remediationBackground>
+    <issueDetail>No CSRF token was validated when submitting sensitive state change POST requests.</issueDetail>
+  </issue>
+  <issue>
+    <name>Password Field Submitted using HTTP GET</name>
+    <host ip="127.0.0.1">http://localhost:3000</host>
+    <path>/api/login-quick</path>
+    <location>http://localhost:3000/api/login-quick</location>
+    <severity>Low</severity>
+    <confidence>Certain</confidence>
+    <issueBackground>Submitting sensitive credentials via HTTP GET query parameters causes passwords to be recorded in browser history, server access logs, and HTTP Referer headers.</issueBackground>
+    <remediationBackground>Ensure credentials are only transmitted inside HTTP POST request bodies with appropriate Content-Type.</remediationBackground>
+    <issueDetail>Query parameter 'pwd' was observed in GET request URL.</issueDetail>
+  </issue>
+</issues>
